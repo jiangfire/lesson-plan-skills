@@ -58,6 +58,11 @@
   .layout-closing .action { font-size: 30px; line-height: 1.6; background: var(--ok-bg);
     border: 2px solid var(--ok); border-radius: 16px; padding: 40px; }
 
+  /* 图片（base64 内嵌）：配合要点页/两栏页使用，一页最多一张 */
+  .reveal img { max-width: 100%; border-radius: 8px; }
+  .layout-bullets img, .layout-cols img { max-height: 380px; display: block; margin-top: 24px; }
+  .layout-cols .col img { margin-top: 16px; }
+
   /* 讲师提示：按 S 唤出 */
   .note { display: none; }
   #notebar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
