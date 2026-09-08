@@ -4,35 +4,40 @@
 
 ## 项目概览
 
-本仓库是一个 **Agent Skill（名为 lesson-plan）**，不是传统软件项目——没有源码、依赖、构建或部署。它的"代码"是一套供 AI agent 执行的流程文档（`SKILL.md`）+ 两个模板，目标是为**企业内训/成人培训的新手讲师**一次产出一节课的两份装备：
+本仓库是一个 **Agent Skill 集合仓库（含 lesson-plan）**，不是传统软件项目——没有源码、依赖、构建或部署。它的"代码"是供 AI agent 执行的流程文档 + 模板，目标是为**企业内训/成人培训的新手讲师**一次产出一节课的两份装备：
 
-- **教案**（`教案-<主题>.md`）：给讲师备课和自由修改，以 `教案设计.md` 为模板填写；
-- **课件**（`课件-<主题>.html`）：给学员看的单文件幻灯片，以 `references/slide-shell.html` 为壳生成，双击即播（Reveal.js 已内联，离线可用）。
+- **教案**（`教案-<主题>.md`）：给讲师备课和自由修改，以 skill 目录内 `教案设计.md` 为模板填写；
+- **课件**（`课件-<主题>.html`）：给学员看的单文件幻灯片，以 skill 目录内 `references/slide-shell.html` 为壳生成，双击即播（Reveal.js 已内联，离线可用）。
 
 核心设计理念：只保留 6 条"条条能对应到具体教学动作"的教育学原则（成人学习、从做中学、最近发展区支架、及时反馈、组块化、主动建构），并把原则落点写进产出物本身。
 
-**`SKILL.md` 是唯一权威流程**——何时使用、执行流程（7 步）、幻灯片结构与内容约束、设计经验（9 条）都在那里。本文件只是速查和护栏；改教学流程或设计原则时应改 `SKILL.md` 并同步本文件。
+**`skills/lesson-plan/SKILL.md` 是唯一权威流程**——何时使用、执行流程（7 步）、幻灯片结构与内容约束、设计经验（9 条）都在那里。本文件只是速查和护栏；改教学流程或设计原则时应改 `SKILL.md` 并同步本文件。
+
+## 安装与分发
+
+仓库遵循 [skills.sh](https://github.com/vercel-labs/skills) 的 skill 目录约定（`skills/<name>/SKILL.md`），用户通过 `npx skills add jiangfire/lesson-plan-skills` 安装；CLI 会把 `skills/lesson-plan/` 整个目录装入各 agent 的 skills 目录。因此 **skill 目录必须自包含**——SKILL.md 引用的模板、放映壳、素材库规则都在目录内，路径全部相对。
 
 ## 目录结构与文件角色
 
 ```
-SKILL.md                  # Skill 主文件：流程、约束、设计经验（权威）
-教案设计.md               # 教案模板（含 6 原则对照表 + 40 分钟节奏 3+2+10+12+8+5）
-references/
-  slide-shell.html        # Reveal.js 放映壳（只读）
-素材库/                   # 背景资料：讲师自备 + AI 搜集（需讲师审查）
-  README.md               # 素材库规则
+skills/lesson-plan/       # skill 自包含目录
+  SKILL.md                # Skill 主文件：流程、约束、设计经验（权威）
+  教案设计.md             # 教案模板（含 6 原则对照表 + 40 分钟节奏 3+2+10+12+8+5）
+  references/
+    slide-shell.html      # Reveal.js 放映壳（只读）
+  素材库/                 # 背景资料：讲师自备 + AI 搜集（需讲师审查）
+    README.md             # 素材库规则
 ```
 
 具体课程的产出（`教案-*.md` / `课件-*.html`）和素材内容不入库，由 `.gitignore` 排除。
 
 | 文件 | 角色 | 修改规则 |
 | --- | --- | --- |
-| `SKILL.md` | 流程、约束、设计经验 | 改教学流程/设计原则时改这里 |
-| `教案设计.md` | 教案模板 | 只改结构占位，不写具体课题内容 |
-| `references/slide-shell.html` | 放映壳：内联 Reveal.js、固定主题 CSS、播放器 JS | **只读不改**；已固化 1280×720 画布等比缩放、fragment、练习倒计时、S 键讲师提示、`?print-pdf` 打印 |
+| `skills/lesson-plan/SKILL.md` | 流程、约束、设计经验 | 改教学流程/设计原则时改这里 |
+| `skills/lesson-plan/教案设计.md` | 教案模板 | 只改结构占位，不写具体课题内容 |
+| `skills/lesson-plan/references/slide-shell.html` | 放映壳：内联 Reveal.js、固定主题 CSS、播放器 JS | **只读不改**；已固化 1280×720 画布等比缩放、fragment、练习倒计时、S 键讲师提示、`?print-pdf` 打印 |
 | `教案-*.md` / `课件-*.html` | 具体课程产出（不入库，.gitignore 排除） | 教案 md 是主文件，课件永远从教案重新生成 |
-| `素材库/` | 背景资料 | AI 搜集的素材文件头必须标来源 URL + 检索日期 + "状态：待审查"，经讲师确认（改为"已审查"）才能用 |
+| `skills/lesson-plan/素材库/` | 背景资料 | AI 搜集的素材文件头必须标来源 URL + 检索日期 + "状态：待审查"，经讲师确认（改为"已审查"）才能用 |
 
 ## 技术栈与"构建"
 

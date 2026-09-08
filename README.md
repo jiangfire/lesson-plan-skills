@@ -4,6 +4,14 @@
 
 核心思路：只保留少而精、条条能对应到具体教学动作的 6 条教育学原则，并把原则落点写进产出物本身——教案里有原则对照表和设计意图，幻灯片标题旁标注原则编号。
 
+## 安装
+
+```bash
+npx skills add jiangfire/lesson-plan-skills
+```
+
+支持 GitHub 短名、完整 URL、SSH（`git@github.com:jiangfire/lesson-plan-skills.git`）；`-g` 全局安装，`--list` 先查看技能列表。CLI 会自动检测本机已装的 agent（Claude Code / Cursor / Kimi Code CLI 等）并装入对应 skills 目录。
+
 ## 产出物
 
 | 文件 | 受众 | 说明 |
@@ -33,12 +41,13 @@
 ## 目录结构
 
 ```
-SKILL.md                 # Skill 主文件：流程、约束、设计经验
-教案设计.md              # 教案模板（含 6 原则对照表 + 40 分钟节奏）
-references/
-  slide-shell.html       # Reveal.js 放映壳（只读，生成时只替换标记区内容）
-素材库/                  # 背景资料：讲师自备 + AI 搜集（需讲师审查）
-  README.md              # 素材库规则
+skills/lesson-plan/      # skill 自包含目录（npx skills add 安装的就是它）
+  SKILL.md               # Skill 主文件：流程、约束、设计经验
+  教案设计.md            # 教案模板（含 6 原则对照表 + 40 分钟节奏）
+  references/
+    slide-shell.html     # Reveal.js 放映壳（只读，生成时只替换标记区内容）
+  素材库/                # 背景资料：讲师自备 + AI 搜集（需讲师审查）
+    README.md            # 素材库规则
 ```
 
 具体课程的产出（`教案-*.md` / `课件-*.html`）和素材内容不入库，由 `.gitignore` 排除。

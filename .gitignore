@@ -1,5 +1,5 @@
 # 具体课程产出与素材内容（不公开，保留在本地）
 教案-*.md
 课件-*.html
-素材库/*.md
-!素材库/README.md
+skills/lesson-plan/素材库/*.md
+!skills/lesson-plan/素材库/README.md
