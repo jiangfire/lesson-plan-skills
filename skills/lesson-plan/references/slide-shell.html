@@ -71,7 +71,10 @@
   .layout-stat .stats { display: flex; gap: 56px; align-items: flex-start; }
   .layout-stat .stat { flex: 1; }
   .layout-stat .num { font-size: 150px; font-weight: 800; line-height: 1; color: var(--accent);
-    font-variant-numeric: tabular-nums; }
+    font-variant-numeric: tabular-nums; white-space: nowrap; }
+  /* 数字个数自适应：2 个降档、3 个再降，防止横向溢出 1280 画布 */
+  .layout-stat .stats:has(.stat:nth-child(2)) .num { font-size: 118px; }
+  .layout-stat .stats:has(.stat:nth-child(3)) .num { font-size: 92px; }
   .layout-stat .num.warn { color: var(--amber); }
   .layout-stat .cap { margin-top: 20px; font-size: 26px; color: var(--muted); line-height: 1.5; }
 
