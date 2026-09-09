@@ -72,9 +72,9 @@
   .layout-stat .stat { flex: 1; }
   .layout-stat .num { font-size: 150px; font-weight: 800; line-height: 1; color: var(--accent);
     font-variant-numeric: tabular-nums; white-space: nowrap; }
-  /* 数字个数自适应：2 个降档、3 个再降，防止横向溢出 1280 画布 */
-  .layout-stat .stats:has(.stat:nth-child(2)) .num { font-size: 118px; }
-  .layout-stat .stats:has(.stat:nth-child(3)) .num { font-size: 92px; }
+  /* 数字个数自适应：2 个降档、3 个再降，防止横向溢出 1280 画布（data-count 由播放器 JS 自动写入，替代 :has() 以兼容旧浏览器） */
+  .layout-stat .stats[data-count="2"] .num { font-size: 118px; }
+  .layout-stat .stats[data-count="3"] .num { font-size: 92px; }
   .layout-stat .num.warn { color: var(--amber); }
   .layout-stat .cap { margin-top: 20px; font-size: 26px; color: var(--muted); line-height: 1.5; }
 
@@ -130,6 +130,22 @@
       <aside class="note">示例要点页</aside>
     </section>
 
+    <section class="layout-cols">
+      <p class="kicker">组块二 · 对比</p>
+      <h2>标题即结论 <span class="tag">③</span></h2>
+      <div class="cols">
+        <div class="col">
+          <h3>左栏</h3>
+          <p>问题或素材（≤20 字/条）</p>
+        </div>
+        <div class="col fragment">
+          <h3>揭晓栏</h3>
+          <p>答案/揭晓内容，整栏加 class="fragment"</p>
+        </div>
+      </div>
+      <aside class="note">示例两栏页：揭晓栏整栏加 fragment</aside>
+    </section>
+
     <section class="layout-stat">
       <p class="kicker">数据</p>
       <div class="stats">
@@ -150,6 +166,16 @@
       <div class="task">练习：＿＿＿</div>
       <p class="meta">独立完成 · 6 分钟 · 随后提问 1–2 人</p>
       <aside class="note">练习页：进入本页自动倒计时</aside>
+    </section>
+
+    <section class="layout-closing">
+      <p class="kicker">总结</p>
+      <h2>一句话结论 <span class="tag">①</span></h2>
+      <div class="action">
+        <p><strong>课后行动</strong>：＿＿＿</p>
+        <p>收尾金句放这里</p>
+      </div>
+      <aside class="note">示例收尾页</aside>
     </section>
 
     <!-- ============ 幻灯片到这里结束 ============ -->
@@ -182,6 +208,11 @@ Reveal.initialize({
   var timerInt = null, remain = 0;
   var timerEl = document.getElementById('timer');
   var notebar = document.getElementById('notebar');
+
+  /* 大数字页：按数字个数写 data-count，CSS 据此降档字号 */
+  Array.prototype.forEach.call(document.querySelectorAll('.layout-stat .stats'), function (s) {
+    s.setAttribute('data-count', Math.min(s.querySelectorAll('.stat').length, 3));
+  });
 
   function tick() {
     var m = Math.floor(Math.max(0, remain) / 60), s = Math.max(0, remain) % 60;
