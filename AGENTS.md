@@ -11,7 +11,7 @@
 
 核心设计理念：只保留 6 条"条条能对应到具体教学动作"的教育学原则（成人学习、从做中学、最近发展区支架、及时反馈、组块化、主动建构），并把原则落点写进产出物本身。
 
-**`skills/lesson-plan/SKILL.md` 是唯一权威流程**——何时使用、执行流程（7 步）、幻灯片结构与内容约束都在那里；设计经验（9 条）披露在 `references/设计经验.md`，交付话术和配图规则分别在 `references/交付话术.md`、`references/配图.md`。本文件只是速查和护栏；改教学流程或设计原则时应改 `SKILL.md` 及对应 references 文件并同步本文件。
+**`skills/lesson-plan/SKILL.md` 是唯一权威流程**——何时使用、执行流程（7 步）、幻灯片结构与内容约束都在那里；设计经验（10 条）披露在 `references/设计经验.md`，交付话术和配图规则分别在 `references/交付话术.md`、`references/配图.md`。本文件只是速查和护栏；改教学流程或设计原则时应改 `SKILL.md` 及对应 references 文件并同步本文件。
 
 ## 安装与分发
 
@@ -25,7 +25,7 @@ skills/lesson-plan/       # skill 自包含目录
   教案设计.md             # 教案模板（含 6 原则对照表 + 40 分钟节奏 3+2+10+12+8+5）
   references/
     slide-shell.html      # Reveal.js 放映壳（只读）
-    设计经验.md            # 9 条设计经验（生成参照 + 校验清单）
+    设计经验.md            # 10 条设计经验（生成参照 + 校验清单）
     交付话术.md            # 交付时回复用户的话术要点
     配图.md                # 可选配图规则（base64 内嵌）
   素材库/                 # 背景资料：讲师自备 + AI 搜集（需讲师审查）
@@ -37,7 +37,7 @@ skills/lesson-plan/       # skill 自包含目录
 | 文件 | 角色 | 修改规则 |
 | --- | --- | --- |
 | `skills/lesson-plan/SKILL.md` | 流程、约束 | 改教学流程时改这里 |
-| `skills/lesson-plan/references/设计经验.md` | 9 条设计经验 | 沉淀/修改设计经验时改这里 |
+| `skills/lesson-plan/references/设计经验.md` | 10 条设计经验 | 沉淀/修改设计经验时改这里 |
 | `skills/lesson-plan/references/交付话术.md`、`references/配图.md` | 交付话术、配图规则 | 按需修改 |
 | `skills/lesson-plan/教案设计.md` | 教案模板 | 只改结构占位，不写具体课题内容 |
 | `skills/lesson-plan/references/slide-shell.html` | 放映壳：内联 Reveal.js、固定主题 CSS、播放器 JS | **生成课件时只读不改**（维护升级除外，如字号自适应）；已固化 1280×720 画布等比缩放、fragment、练习倒计时、S 键讲师提示、`?print-pdf` 打印 |
@@ -66,7 +66,7 @@ skills/lesson-plan/       # skill 自包含目录
 
 没有自动化测试套件。生成/修改课件后按以下方式自检（对应 `SKILL.md` 第 6 步）：
 
-- **结构自查**：页数 ≈ 课时（40 分钟课 15–18 页）；练习页都有 `data-timer`；答案示例页时序正确；fragment 用在分步处且一页 ≤5 个；每页有 `<aside class="note">` 讲师提示；逐条过一遍 `references/设计经验.md` 的 9 条设计经验。
+- **结构自查**：页数 ≈ 课时（40 分钟课 15–18 页）；练习页都有 `data-timer`；答案示例页时序正确；fragment 用在分步处且一页 ≤5 个；每页有 `<aside class="note">` 讲师提示；逐条过一遍 `references/设计经验.md` 的 10 条设计经验。
 - **脚本语法校验**：抽出内联 `<script>` 块跑 `node --check`（需要有 node）。
 - **人工试播**：让用户双击课件验证：←/→ 翻页、fragment 逐条浮现、练习页进页自动倒计时、按 S 看讲师提示、地址栏加 `?print-pdf` 后 Ctrl+P 导出 PDF。
 
